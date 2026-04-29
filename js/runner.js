@@ -3,6 +3,10 @@ var runner = {
 	last_fps: -1,
 	_run: ()=>{
 		if (!runner.running) return;
+
+		if (typeof canvas_events !== 'undefined' && canvas_events.history) {
+			canvas_events.history.maybe_autosnapshot();
+		}
 		
 		if (runner.last_eval_time) {
 			engine_info.run(Math.min(+new Date()-runner.last_eval_time,100)/1000*runner.speed);
